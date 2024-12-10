@@ -36,8 +36,14 @@
 
 #include <qnamespace.h>
 
-#define FOILAUTH_APP_NAME          "harbour-foilauth"
-#define FOILAUTH_QML_IMPORT        "harbour.foilauth"
+#define PROGRAM_NAME "foilauth"
+
+#define STRINGIZE_NX(A) #A
+#define PREFIX(a) STRINGIZE_NX(a)
+#define APP_PREF PREFIX(PROGRAM_PREFIX)
+
+#define FOILAUTH_APP_NAME          APP_PREF "-" PROGRAM_NAME
+#define FOILAUTH_QML_IMPORT        APP_PREF "." PROGRAM_NAME
 #define FOILAUTH_DCONF_ROOT        "/apps/" FOILAUTH_APP_NAME "/"
 
 #endif // FOILNOTES_DEFS_H

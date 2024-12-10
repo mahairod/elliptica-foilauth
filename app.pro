@@ -25,6 +25,8 @@ CONFIG(debug, debug|release) {
     DEFINES += DEBUG HARBOUR_DEBUG
 }
 
+DEFINES += PROGRAM_PREFIX=$${PREFIX}
+
 equals(QT_ARCH, arm64){
     message(Linking with OpenSSL)
     PKGCONFIG += libcrypto

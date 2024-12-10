@@ -1713,13 +1713,12 @@ FoilAuthModel::Private::addGroup(
 {
     // Generate unique id
     GString* dest = g_string_sized_new(8);
-    FoilAuth::generateId(dest);
-    QString id(QString::fromLocal8Bit(dest->str, dest->len));
-    while (findData(id)) {
+    QString id;
+    do {
         g_string_truncate(dest, 0);
         FoilAuth::generateId(dest);
         id = QString::fromLocal8Bit(dest->str, dest->len);
-    }
+    } while (findData(id));
     g_string_free(dest, TRUE);
 
     // Insert the new group to the end of the list
@@ -2311,7 +2310,9 @@ FoilAuthModel::flags(
 QHash<int,QByteArray>
 FoilAuthModel::roleNames() const
 {
-    QHash<int,QByteArray> roles;
+    static QHash<int,QByteArray> roles;
+    if (!roles.isEmpty())
+		return roles;
 #define ROLE(X,x) roles.insert(ModelData::X##Role, #x);
 FOILAUTH_ROLES(ROLE)
 #undef ROLE

@@ -40,7 +40,9 @@
 #include "HarbourDebug.h"
 #include "HarbourProtoBuf.h"
 
+#ifndef _CONSOLE
 #include "qrencode.h"
+#endif
 
 #include <foil_random.h>
 
