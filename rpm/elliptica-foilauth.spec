@@ -57,3 +57,4 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %{_bindir}/%{name}-cli
+%{_datadir}/translations/%{name}-cli*.qm
