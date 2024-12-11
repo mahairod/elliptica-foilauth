@@ -1,14 +1,12 @@
+PREFIX = elliptica
 NAME = foilauth
 
 openrepos {
 	DEFINES += OPENREPOS
 	CONFIG += app_settings
-	PREFIX = harbour
-} else {
-	PREFIX = elliptica
 }
 
-TARGET = $${PREFIX}-$${NAME}-cli
+TARGET = $${PREFIX}-$${NAME}
 
 linux:equals(QT_ARCH, x86_64): CONFIG += desktop
 
@@ -181,7 +179,7 @@ qm.CONFIG += no_check_exist
 INSTALLS += qm
 
 CONFIG(desktop) {
-	target.path = /opt/bin/
+	target.path = /opt/$${TARGET}/bin/
 	target.CONFIG += no_check_exist
 	INSTALLS += target
 }
