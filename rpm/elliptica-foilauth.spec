@@ -44,7 +44,7 @@ Url:
 %setup -q
 
 %build
-%qtc_qmake5 CONFIG+=openrepos %{name}-cli.pro
+%qtc_qmake5 CONFIG+=openrepos cli-app.pro
 %qtc_make %{?_smp_mflags}
 
 %check
