@@ -1,4 +1,4 @@
-Name:           harbour-foilauth
+Name:           elliptica-foilauth
 Summary:        HMAC-Based One-Time Password generator
 Version:        1.1.10
 Release:        1
@@ -7,8 +7,11 @@ Group:          Applications/Internet
 URL:            https://github.com/monich/harbour-foilauth
 Source0:        %{name}-%{version}.tar.gz
 
+%define glib_version 2.32
+
 Requires:       sailfishsilica-qt5
 Requires:       qt5-qtsvg-plugin-imageformat-svg
+Requires:		glib2 >= %{glib_version}
 BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(keepalive)
 BuildRequires:  pkgconfig(libcrypto)
@@ -50,6 +53,11 @@ Url:
   Homepage: https://openrepos.net/content/slava/foil-auth
 %endif
 
+%package -n cli
+Summary:	Console version of %{name}
+Group:		Applications/Internet
+Requires:	glib2 >= %{glib_version}
+
 %prep
 %setup -q -n %{name}-%{version}
 
@@ -76,3 +84,7 @@ desktop-file-install --delete-original \
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 %{_datadir}/jolla-settings/entries/%{name}.json
 %{_datadir}/translations/%{name}*.qm
+
+%files -n cli
+%defattr(-,root,root,-)
+%{_bindir}/%{name}-cli
