@@ -89,12 +89,12 @@ int main(int argc, char *argv[]) {
 
 	int passRole = -1;
 	int labelRole = -1;
-	for (auto it = model.roleNames().constKeyValueBegin(); it != model.roleNames().constKeyValueEnd(); ++it ) {
-		if (it->second == "currentPassword") {
-			passRole = it->first;
+	for (auto it = model.roleNames().cbegin(); it != model.roleNames().cend(); ++it ) {
+		if (it.value() == "currentPassword") {
+			passRole = it.key();
 		}
-		if (it->second == "label") {
-			labelRole = it->first;
+		if (it.value() == "label") {
+			labelRole = it.key();
 		}
 	}
 
