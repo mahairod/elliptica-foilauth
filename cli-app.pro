@@ -128,6 +128,7 @@ SOURCES += \
 # Translations
 
 TRANSLATION_IDBASED=-idbased
+TRANSLATION_SOURCES = src/cli.cpp
 
 defineTest(addTrFile) {
     rel = translations/$${1}
