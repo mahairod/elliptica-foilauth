@@ -79,10 +79,6 @@ desktop-file-install --delete-original \
   --dir %{buildroot}%{_datadir}/applications \
    %{buildroot}%{_datadir}/applications/*.desktop
 
-%install -n cli
-rm -rf %{buildroot}
-%qmake5_install
-
 %files
 %defattr(-,root,root,-)
 %{_bindir}/%{name}
