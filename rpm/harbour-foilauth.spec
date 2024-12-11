@@ -75,10 +75,6 @@ make %{?_smp_mflags} -C test test
 rm -rf %{buildroot}
 %qmake5_install
 
-desktop-file-install --delete-original \
-  --dir %{buildroot}%{_datadir}/applications \
-   %{buildroot}%{_datadir}/applications/*.desktop
-
 %files
 %defattr(-,root,root,-)
 %{_bindir}/%{name}
