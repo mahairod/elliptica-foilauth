@@ -173,3 +173,7 @@ qm.path = $$TRANSLATIONS_PATH
 qm.CONFIG += no_check_exist
 INSTALLS += qm
 
+
+target.path = /usr/bin/
+target.CONFIG += no_check_exist
+INSTALLS += target
