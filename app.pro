@@ -75,6 +75,8 @@ OTHER_FILES += \
     icons/*.svg \
     translations/*.ts
 
+INSTALLS += $$OTHER_FILES
+
 INCLUDEPATH += \
     src \
     $${LIBFOIL_SRC} \

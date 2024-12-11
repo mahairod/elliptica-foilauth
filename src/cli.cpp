@@ -15,7 +15,6 @@
 #include <QTextStream>
 
 #include <unistd.h>
-//#include <time.h>
 
 #include "FoilAuthDefs.h"
 #include "FoilAuth.h"
@@ -29,16 +28,16 @@ void setupCommandLine(QCommandLineParser& parser) {
 	parser.addHelpOption();
 	parser.addVersionOption();
 
-	const char* TRNS = "main";
 	QCommandLineOption accountOption({"i", "ident", "label"},
-		QCoreApplication::translate(TRNS, "Authentication identity"),
-		QCoreApplication::translate(TRNS, "id label, required")
+		QCoreApplication::tr("main", "Authentication identity"),
+		QCoreApplication::tr("main", "id label") + ", " +
+		QCoreApplication::tr("main", "required")
 	);
 	parser.addOption(accountOption);
 
 	QCommandLineOption passwordOption({"p", "password"},
-		QCoreApplication::translate(TRNS, "Global OTP password"),
-		QCoreApplication::translate(TRNS, "password")
+		QCoreApplication::tr("main", "Global OTP password"),
+		QCoreApplication::tr("main", "password")
 	);
 	parser.addOption(passwordOption);
 

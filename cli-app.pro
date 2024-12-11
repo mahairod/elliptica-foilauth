@@ -128,7 +128,7 @@ SOURCES += \
 # Translations
 
 TRANSLATION_IDBASED=-idbased
-TRANSLATION_SOURCES = src/cli.cpp
+TRANSLATION_SOURCES = $$PWD/src/cli.cpp
 
 defineTest(addTrFile) {
     rel = translations/$${1}
@@ -172,3 +172,4 @@ for(l, LANGUAGES) {
 qm.path = $$TRANSLATIONS_PATH
 qm.CONFIG += no_check_exist
 INSTALLS += qm
+
