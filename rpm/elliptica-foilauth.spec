@@ -67,6 +67,7 @@ rm -rf %{buildroot}
 %{_bindir}/%{name}
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
+%{_datadir}/applications/%{cliname}.desktop
 %{_datadir}/icons/hicolor/*/apps/%{name}.png
 %{_datadir}/jolla-settings/entries/%{name}.json
 %{_datadir}/translations/%{name}*.qm
