@@ -58,6 +58,9 @@ Summary:	Console version of %{name}
 Group:		Applications/Internet
 Requires:	glib2 >= %{glib_version}
 
+%description -n cli
+This package contains a console-only version of %{name}
+
 %prep
 %setup -q -n %{name}-%{version}
 
