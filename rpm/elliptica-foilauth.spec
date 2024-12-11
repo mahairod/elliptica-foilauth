@@ -1,7 +1,7 @@
-Name:           elliptica-foilauth
-Summary:        Console version of %{name}
-Version:        1.1.10
-Release:        1
+Name:           harbour-foilauth
+Summary:        HMAC-Based One-Time Password generator
+Version:        1.1.10.ell
+Release:        4
 License:        BSD
 Group:          Applications/Internet
 URL:            https://github.com/mahairod/elliptica-foilauth
@@ -30,7 +30,6 @@ BuildRequires:  qt5-qttools-linguist
 %description
 HMAC-Based One-Time Password generator compatible with Google
 One-Time Password authentication mechanism.
-This package contains a console-only version of %{name}
 
 %if "%{?vendor}" == "chum"
 Categories:
@@ -40,11 +39,19 @@ Url:
   Homepage: https://openrepos.net/content/slava/foil-auth
 %endif
 
+%package -n %{name}-cli
+Summary:	Console version of %{name}
+Group:		Applications/Internet
+Requires:	glib2 >= %{glib_version}
+
+%description -n %{name}-cli
+This package contains a console-only version of %{name}
+
 %prep
 %setup -q
 
 %build
-%qtc_qmake5 CONFIG+=openrepos cli-app.pro
+%qtc_qmake5 CONFIG+=openrepos elliptica-foilauth.pro
 %qtc_make %{?_smp_mflags}
 
 %check
@@ -56,5 +63,15 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
+%{_bindir}/%{name}
+%{_datadir}/%{name}
+%{_datadir}/applications/%{name}.desktop
+%{_datadir}/icons/hicolor/*/apps/%{name}.png
+%{_datadir}/jolla-settings/entries/%{name}.json
+%{_datadir}/translations/%{name}*.qm
+
+%files -n %{name}-cli
+%defattr(-,root,root,-)
 %{_bindir}/%{name}-cli
+%{_datadir}/%{name}-cli
 %{_datadir}/translations/%{name}-cli*.qm

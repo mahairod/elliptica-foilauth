@@ -2,8 +2,11 @@ PREFIX = harbour
 NAME = foilauth
 
 openrepos {
-    DEFINES += OPENREPOS
-    CONFIG += app_settings
+	DEFINES += OPENREPOS
+	CONFIG += app_settings
+	PREFIX = harbour
+} else {
+	PREFIX = elliptica
 }
 
 TARGET = $${PREFIX}-$${NAME}
@@ -75,7 +78,9 @@ OTHER_FILES += \
     icons/*.svg \
     translations/*.ts
 
-INSTALLS += $$OTHER_FILES
+CONFIG(desktop) {
+	INSTALLS += $$OTHER_FILES
+}
 
 INCLUDEPATH += \
     src \

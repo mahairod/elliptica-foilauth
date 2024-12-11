@@ -1,25 +1,36 @@
-PREFIX = elliptica
 NAME = foilauth
 
 openrepos {
-    DEFINES += OPENREPOS
-    CONFIG += app_settings
+	DEFINES += OPENREPOS
+	CONFIG += app_settings
+	PREFIX = harbour
+} else {
+	PREFIX = elliptica
 }
 
 TARGET = $${PREFIX}-$${NAME}-cli
+
+linux:equals(QT_ARCH, x86_64): CONFIG += desktop
+
+!CONFIG(desktop) {
+
+CONFIG += sailfishapp link_pkgconfig
+PKGCONFIG += sailfishapp glib-2.0 gobject-2.0
+INST_DIR=/usr/share
+
+} else {
+
 CONFIG += link_pkgconfig
 PKGCONFIG += glib-2.0 gobject-2.0
+INST_DIR=/opt
+QT += gui
+
+}
+
 QT += sql dbus concurrent
 
 QMAKE_CXXFLAGS += -Wno-unused-parameter
 QMAKE_CFLAGS += -Wno-unused-parameter
-
-linux:equals(QT_ARCH, x86_64) {
-    CONFIG += desktop
-	INST_DIR=/opt
-} else {
-	INST_DIR=/usr/share
-}
 
 app_settings {
     # This path is hardcoded in jolla-settings
@@ -32,11 +43,7 @@ CONFIG(debug, debug|release) {
     DEFINES += DEBUG HARBOUR_DEBUG
 }
 
-DEFINES += PROGRAM_PREFIX=$${PREFIX}
-
-equals(PREFIX, elliptica) {
-    DEFINES += _CONSOLE
-}
+DEFINES += PROGRAM_PREFIX=$${PREFIX} _CONSOLE
 
 equals(QT_ARCH, arm64){
     message(Linking with OpenSSL)
@@ -173,7 +180,8 @@ qm.path = $$TRANSLATIONS_PATH
 qm.CONFIG += no_check_exist
 INSTALLS += qm
 
-
-target.path = /usr/bin/
-target.CONFIG += no_check_exist
-INSTALLS += target
+CONFIG(desktop) {
+	target.path = /opt/bin/
+	target.CONFIG += no_check_exist
+	INSTALLS += target
+}

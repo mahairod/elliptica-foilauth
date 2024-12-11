@@ -29,15 +29,15 @@ void setupCommandLine(QCommandLineParser& parser) {
 	parser.addVersionOption();
 
 	QCommandLineOption accountOption({"i", "ident", "label"},
-		QCoreApplication::tr("main", "Authentication identity"),
-		QCoreApplication::tr("main", "id label") + ", " +
-		QCoreApplication::tr("main", "required")
+		QCoreApplication::translate("main", "Authentication identity"),
+		QCoreApplication::translate("main", "id label") + ", " +
+		QCoreApplication::translate("main", "required")
 	);
 	parser.addOption(accountOption);
 
 	QCommandLineOption passwordOption({"p", "password"},
-		QCoreApplication::tr("main", "Global OTP password"),
-		QCoreApplication::tr("main", "password")
+		QCoreApplication::translate("main", "Global OTP password"),
+		QCoreApplication::translate("main", "password")
 	);
 	parser.addOption(passwordOption);
 
