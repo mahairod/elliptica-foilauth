@@ -54,6 +54,6 @@ make %{?_smp_mflags} -C test test
 rm -rf %{buildroot}
 %qmake5_install
 
-%files -n cli
+%files
 %defattr(-,root,root,-)
 %{_bindir}/%{name}-cli
