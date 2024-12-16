@@ -41,6 +41,11 @@ void setupCommandLine(QCommandLineParser& parser) {
 	);
 	parser.addOption(passwordOption);
 
+	QCommandLineOption listOption({"l", "list"},
+		QCoreApplication::translate("main", "Lists identities")
+	);
+	parser.addOption(listOption);
+
 }
 
 int main(int argc, char *argv[]) {
@@ -62,8 +67,9 @@ int main(int argc, char *argv[]) {
 	char* keyPwd = getenv(PASSWD_KEY);
 	QString pwd = keyPwd ? keyPwd : argsParser.value("p");
 
+	bool list = argsParser.isSet("list");
 	QString ident = argsParser.value("ident");
-	if (ident.isEmpty()) {
+	if (ident.isEmpty() && !list) {
 		qCritical() << "Identity not set";
 		return 2;
 	}
@@ -78,10 +84,10 @@ int main(int argc, char *argv[]) {
 			qInfo() << "Secrets are ready";
 			if (consumedTokens >= model.rowCount()) {
 				qInfo() << "Processed " << consumedTokens << "tokens. Exiting";
-				exit(0);
+				qApp->exit(0);
 			} else {
 				qInfo() << "Waiting for consuming...";
-				QTimer::singleShot(1000, [](){ exit(4); });
+				QTimer::singleShot(1000, [](){ qApp->exit(4); });
 			}
 		}
 	});
@@ -97,17 +103,22 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	QObject::connect(&model, &FoilAuthModel::rowsInserted, [&model, &ident, &consumedTokens, passRole, labelRole](const QModelIndex &parent, int first, int last)
+	QTextStream out(stdout);
+	QObject::connect(&model, &FoilAuthModel::rowsInserted, [&model, &ident, &consumedTokens, &out, passRole, labelRole, list](const QModelIndex &parent, int first, int last)
 	{
 		for (int ind = first; ind <= last; ++ind) {
 			QModelIndex modInd = model.index(ind, 0);
 			QString id = model.data(modInd, labelRole).toString();
 			qInfo() << "New id: " << id;
 			consumedTokens++;
+			if (list) {
+				out << "ID=" << id << "\n";
+				continue;
+			}
 			if (ident == id) {
 				qInfo() << "Found identity " << ident;
 				QVariant varVal = model.data(modInd, passRole);
-				QTextStream(stdout) << "password:" << varVal.toString();
+				out << "password:" << varVal.toString();
 				break;
 			}
 		}

@@ -23,5 +23,9 @@
         <source>password</source>
         <translation>пароль</translation>
     </message>
+    <message>
+        <source>Lists identities</source>
+        <translation>Перечисляет идентичности</translation>
+    </message>
 </context>
 </TS>

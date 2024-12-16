@@ -21,7 +21,11 @@
     </message>
     <message>
         <source>password</source>
-        <translation type="unfinished">password</translation>
+        <translation type="unfinished">Kennwort</translation>
+    </message>
+    <message>
+        <source>Lists identities</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

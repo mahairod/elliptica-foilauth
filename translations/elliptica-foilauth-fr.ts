@@ -23,5 +23,9 @@
         <source>password</source>
         <translation type="unfinished">mot de passe</translation>
     </message>
+    <message>
+        <source>Lists identities</source>
+        <translation type="unfinished">Liste des identités</translation>
+    </message>
 </context>
 </TS>
